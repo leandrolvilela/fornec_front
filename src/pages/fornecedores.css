@@ -1,0 +1,62 @@
+/* Estilos para a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+
+
+  thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Estilos para as células da coluna "Ações" */
+  td:last-child {
+    text-align: center;
+  }
+  
+  /* Estilos para as linhas ímpares (alternadas) */
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para hover (ao passar o mouse sobre a linha) */
+  tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .table-container th:first-child,
+  .table-container td:first-child {
+    width: 20px; /* Ajuste a largura conforme necessário */
+  }
+  
+  .table-container th:last-child,
+  .table-container td:last-child {
+    width: 300px; /* Ajuste a largura conforme necessário */
+  }
+  
+  .adicionar-fornecedor button.ver-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .adicionar-fornecedor button.ver-button:hover {
+    background-color: #0056b3;
+  }
+ 
