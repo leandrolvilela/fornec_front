@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import modalStyles from './modalStyles';
+import config from '../assets/config.json'; 
 import '../pages/fornecedores.css';
 
 
@@ -80,7 +81,7 @@ const EnderecosFornecedor = fornecedor => {
     formData.append('fornecedorEndereco_id', fornecedor.id);
 
     axios
-      .post('http://localhost:5000/fornecedor_endereco', formData)
+      .post(`${config.serverUrl}/fornecedor_endereco`, formData)
       .then((response) => {
         if (response.status === 201 || response.status === 200) {
           alert('Endereço adicionado com sucesso.');

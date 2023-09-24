@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import banner from '../assets/banner.png';
 import axios from 'axios';
 import Modal from 'react-modal';
-// import { useFornecedor } from "../components/FornecedorContext";
+import config from '../assets/config.json'; 
 
 import React from "react";
 
@@ -29,7 +29,7 @@ export default function Fornecedores() {
     };
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/fornecedores')
+        axios.get('${config.serverUrl}/fornecedores')
             .then(res => setFornecedor(res.data.fornecedores))
             .catch(error => console.log(error))
     }, [])
@@ -78,7 +78,7 @@ export default function Fornecedores() {
         }
 
         axios
-            .put(`http://127.0.0.1:5000/fornecedor?id=${fornecedorId}`, dadosAtualizado, {
+            .put(`${config.serverUrl}/fornecedor?id=${fornecedorId}`, dadosAtualizado, {
                 headers: { 'Content-Type': 'application/json' }
             })
             .then((response) => {
@@ -106,7 +106,7 @@ export default function Fornecedores() {
 
     const excluirFornecedor = (fornecedorId) => {
         axios
-            .delete(`http://127.0.0.1:5000/fornecedor?id=${fornecedorId}`)
+            .delete(`${config.serverUrl}/fornecedor?id=${fornecedorId}`)
             .then((response) => {
                 if (response.status === 200) {
                     alert(`Fornecedor com ID ${fornecedorId} foi excluído com sucesso.`);

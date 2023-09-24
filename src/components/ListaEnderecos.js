@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Modal from 'react-modal';
 import modalStyles from './modalStyles';
+import config from '../assets/config.json'; 
 
 import React from "react";
 import '../pages/fornecedores.css'
@@ -37,7 +38,7 @@ const ListaEnderecos = props => {
     };
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/fornecedor_endereco?fornecedor_id=${fornecedor_id}`)
+        axios.get(`${config.serverUrl}/fornecedor_endereco?fornecedor_id=${fornecedor_id}`)
             .then(res => {
                 setEndereco(res.data.enderecos_fornecedores);
             })
@@ -92,7 +93,7 @@ const ListaEnderecos = props => {
         }
         
         axios
-            .put(`http://127.0.0.1:5000/fornecedor_endereco?fornecedor_id=${fornecedorId}&id=${enderecoId}`, dadosAtualizado, {
+            .put(`${config.serverUrl}/fornecedor_endereco?fornecedor_id=${fornecedorId}&id=${enderecoId}`, dadosAtualizado, {
                 headers: { 'Content-Type': 'application/json' }
             })
             .then((response) => {
@@ -120,7 +121,7 @@ const ListaEnderecos = props => {
 
     const excluirEndereco = (enderecoId, fornecedorId) => {
         axios
-            .delete(`http://127.0.0.1:5000/fornecedor_endereco?id_end=${enderecoId}&fornecedor_id=${fornecedorId}`)
+            .delete(`${config.serverUrl}/fornecedor_endereco?id_end=${enderecoId}&fornecedor_id=${fornecedorId}`)
             .then((response) => {
                 if (response.status === 200) {
                     alert(`Endereço ${enderecoId} do fornecedor ID ${fornecedorId} foi excluído com sucesso.`);
