@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Modal from 'react-modal';
 import modalStyles from './modalStyles';
-import config from '../assets/config.json'; 
+import config from '../assets/config.json';
 
 import React from "react";
 import '../pages/fornecedores.css'
@@ -38,13 +38,14 @@ const ListaEnderecos = props => {
     };
 
     useEffect(() => {
-        axios.get(`${config.serverUrl}/fornecedor_endereco?fornecedor_id=${fornecedor_id}`)
-            .then(res => {
-                setEndereco(res.data.enderecos_fornecedores);
-            })
-            .catch(error => console.log('Fornecedor: ',props.fornecedor_id,' erro: ',error))
-        }, [fornecedor_id, enderecoList]
-    );
+        if (fornecedor_id !== null) {
+            axios.get(`${config.serverUrl}/fornecedor_endereco?fornecedor_id=${fornecedor_id}`)
+                .then(res => {
+                    setEndereco(res.data.enderecos_fornecedores);
+                })
+                .catch(error => console.log('Fornecedor: ', props.fornecedor_id, ' erro: ', error))
+        }
+    }, [fornecedor_id, enderecoList, props.fornecedor_id]);
 
     const atualizarEndereco = (fornecedorId, dadosAtualizados) => {
         // Encontre o índice do fornecedor que deseja atualizar
@@ -65,7 +66,7 @@ const ListaEnderecos = props => {
         } else {
             if (enderecoList.length > 0) {
                 const indiceEnderecoNovo = enderecoList.length + 1;
-      
+
                 // copia a lista existente
                 const novaListaEnderecos = [...enderecoList];
 
@@ -83,15 +84,15 @@ const ListaEnderecos = props => {
 
     const salvarEdicaoEndereco = (fornecedorId, enderecoId) => {
         const dadosAtualizado = {
-            id:            enderecoId,
+            id: enderecoId,
             fornecedor_id: fornecedorId,
-            cep:           enderecoEditado.cep,
-            cidade:        enderecoEditado.cidade,
-            endereco:      enderecoEditado.endereco,
+            cep: enderecoEditado.cep,
+            cidade: enderecoEditado.cidade,
+            endereco: enderecoEditado.endereco,
             tipo_endereco: enderecoEditado.tipo_endereco,
-            uf:            enderecoEditado.uf,
+            uf: enderecoEditado.uf,
         }
-        
+
         axios
             .put(`${config.serverUrl}/fornecedor_endereco?fornecedor_id=${fornecedorId}&id=${enderecoId}`, dadosAtualizado, {
                 headers: { 'Content-Type': 'application/json' }

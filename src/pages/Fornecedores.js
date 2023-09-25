@@ -29,7 +29,7 @@ export default function Fornecedores() {
     };
 
     useEffect(() => {
-        axios.get('${config.serverUrl}/fornecedores')
+        axios.get(`${config.serverUrl}/fornecedores`)
             .then(res => setFornecedor(res.data.fornecedores))
             .catch(error => console.log(error))
     }, [])
